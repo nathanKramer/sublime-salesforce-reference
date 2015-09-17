@@ -46,6 +46,10 @@
       "serviceconsole": {
         "refreshCacheOnLoad": false,
         "excludeFromAllDocumentationCommand": false
+      },
+      "mattdamon": {
+        "refreshCacheOnLoad": false,
+        "excludeFromAllDocumentationCommand": true
       }
     }
 }

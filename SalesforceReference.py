@@ -63,6 +63,12 @@ class SalesforceReferenceAllDocumentationTypesCommand(sublime_plugin.WindowComma
         thread.start()
         ThreadProgress(thread, "Retrieving Salesforce Reference Index...", "")
 
+class SalesforceReferenceMattDamonCommand(sublime_plugin.WindowCommand):
+    def run(self):
+        thread = RetrieveIndexThread(self.window, DocTypeEnum.MATTDAMON)
+        thread.start()
+        ThreadProgress(thread, "Retrieving Matt Damon Reference Index...", "")
+
 
 class RetrieveIndexThread(threading.Thread):
     """

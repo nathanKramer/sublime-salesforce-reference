@@ -14,5 +14,9 @@
   {
     "caption": "Salesforce Reference - All Documentation Types",
     "command": "salesforce_reference_all_documentation_types"
+  },
+  {
+    "caption": "Salesforce Reference - All Matt Damon Types",
+    "command": "salesforce_reference_matt_damon"
   }
 ]

@@ -136,6 +136,24 @@ class ServiceConsoleDocScrapingStrategy(DocRetrievalStrategy):
                     )
         self.done_callback()
 
+class MattDamonStrategy(DocRetrievalStrategy):
+    def __init__(self, window, cache, cache_lock, done_callback):
+        DocRetrievalStrategy.__init__(self, window, cache, cache_lock, done_callback)
+
+    @property
+    def doc_type(self):
+        return DocTypeEnum.MATTDAMON.name
+
+    def run(self):
+        with self.cache_lock:
+            self.cache.append(SalesforceReferenceCacheEntry("Matt Damon - Twitter", "https://twitter.com/mattdamon_", DocTypeEnum.MATTDAMON.name))
+            self.cache.append(SalesforceReferenceCacheEntry("Matt Damon - Wikipedia", "https://en.wikipedia.org/wiki/Matt_Damon", DocTypeEnum.MATTDAMON.name))
+            self.cache.append(SalesforceReferenceCacheEntry("Matt Damon - IMDB", "http://www.imdb.com/name/nm0000354/", DocTypeEnum.MATTDAMON.name))
+            self.cache.append(SalesforceReferenceCacheEntry("Google search \'Matt Damon\'", "https://www.google.com/search?site=&tbm=isch&source=hp&biw=1920&bih=850&q=matt+damon&oq=matt+damon", DocTypeEnum.MATTDAMON.name))
+            self.cache.append(SalesforceReferenceCacheEntry("Image Search \'Matt Damon\'", "https://www.google.com/search?q=matt+damon&oq=matt+damon", DocTypeEnum.MATTDAMON.name))
+            self.cache.append(SalesforceReferenceCacheEntry("Matt Damon - Rotten Tomatoes", "http://www.rottentomatoes.com/celebrity/matt_damon/", DocTypeEnum.MATTDAMON.name))
+        self.done_callback()
+
 class DocType:
     def __init__(self, name, url, preferred_strategy):
         self.__name = name
@@ -167,6 +185,11 @@ class DocTypeEnum:
             "http://developer.salesforce.com/docs/atlas.en-us.api_console.meta/api_console/",
             ServiceConsoleDocScrapingStrategy
         )
+    MATTDAMON = DocType(
+            "MATTDAMON",
+            "",
+            MattDamonStrategy
+        )
     @staticmethod
     def get_all():
         return [
@@ -182,3 +205,5 @@ class DocTypeEnum:
             return DocTypeEnum.APEX
         elif name == DocTypeEnum.SERVICECONSOLE.name:
             return DocTypeEnum.SERVICECONSOLE
+        elif name == DocTypeEnum.MATTDAMON.name:
+            return DocTypeEnum.MATTDAMON
